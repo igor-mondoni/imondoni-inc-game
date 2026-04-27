@@ -1,0 +1,43 @@
+import type { AppDispatch, RootState } from '../app/store'
+import {
+  handleBuyAsset,
+  handleBuySpecialUpgrade,
+  handleManualClickWithBonus,
+  handleAddXpPoint
+} from '../features/game/gameThunks'
+import {
+    addClickPower,
+    addDevPoints,
+    addOwnedItem,
+    addOwnedUpgrade,
+    addPointsPerSecond,
+    incrementClickedTimes,
+    multiplyClickPower,
+    multiplyPointsPerSecond,
+    spendDevPoints,
+    addXpPoint,
+    addLevel
+} from '../features/player/playerSlice'
+
+export const addPoints = (point: number) => {
+    return (dispatch: AppDispatch) => {
+        dispatch(addDevPoints(point))
+    }
+}
+
+export const addPps = (pps: number) => {
+    return (dispatch: AppDispatch) => {
+        dispatch(addPointsPerSecond(pps))
+    }
+}
+export const addXpDebug = (xp: number) => {
+    return (dispatch: AppDispatch) => {
+        dispatch(handleAddXpPoint(xp))
+    }
+}
+
+export const addClickP = (power: number) => {
+    return (dispatch: AppDispatch) => {
+        dispatch(addClickPower(power))
+    }
+}
