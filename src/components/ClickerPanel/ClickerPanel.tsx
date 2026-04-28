@@ -1,4 +1,4 @@
-import styles from '../../styles/GamePage.module.css'
+import styles from './ClickerPanel.module.css'
 
 interface ClickerPanelProps {
   onManualClick: () => void

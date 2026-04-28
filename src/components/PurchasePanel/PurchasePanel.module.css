@@ -1,0 +1,124 @@
+.panel {
+  background-color: rgba(2, 6, 23, 0.5);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid #334155; 
+}
+
+.tabContainer {
+    display: flex;
+    border-bottom: 1px solid #334155;
+    margin-bottom: 1.5rem;
+}
+
+.tabButton {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    background-color: transparent;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    font-weight: 600;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    font-size: 1rem;
+}
+
+.tabButton:hover {
+    color: var(--color-text);
+}
+
+.activeTab {
+    color: var(--color-primary);
+    border-bottom-color: var(--color-primary);
+}
+
+.upgradeButton {
+  width: 100%;
+  text-align: left;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: #1e293b;
+  border: 1px solid #334155;
+  transition: background-color 0.2s;
+  margin-bottom: 0.75rem;
+  cursor: pointer;
+}
+
+.upgradeButton:hover:not(:disabled) {
+  background-color: #334155;
+}
+
+.upgradeButton:disabled {
+  background-color: rgba(30, 41, 59, 0.5);
+  border-color: #1e293b;
+  cursor: not-allowed;
+}
+
+.upgradeButton:disabled .upgradeName,
+.upgradeButton:disabled .upgradeCost {
+  color: #64748b; /* text-slate-600 */
+}
+
+.upgradeInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.upgradeName {
+  font-weight: bold;
+  font-size: 1rem;
+  color: var(--color-text);
+}
+
+.upgradePps {
+  font-size: 0.875rem;
+  color: var(--color-primary);
+}
+
+.upgradeCost {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--color-text-muted);
+}
+
+.upgradeOwned {
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.assetContent {
+  flex-grow: 1;
+}
+
+.assetRight {
+  text-align: right;
+}
+
+.assetStats {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: 0.75rem;
+}
+
+.assetIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.tabContent {
+    min-height: 200px;
+}
+.clickBonus {
+  font-size: 0.75rem;
+  color: #6ee7b7;
+}
+
+
+.divider {
+  color: #475569;
+}
