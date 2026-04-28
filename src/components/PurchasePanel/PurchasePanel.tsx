@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import styles from '../../styles/GamePage.module.css'
 import type { Asset, SpecialUpgrade } from '../../types/game'
 import { addPoints,addPps,addXpDebug,addClickP } from '../../game/debugger'
