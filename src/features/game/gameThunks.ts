@@ -120,9 +120,15 @@ export const handleAddXpPoint =
       const newCurrentLevel = getLevelDataFromXp(newCurrentXp);
       dispatch(addXpPoint(xpPoint))
       if (currentLevel.level < newCurrentLevel.level && LEVEL_CAP >= currentLevel.level) {
-        dispatch(addDevPoints(newCurrentLevel.dpBonus));
+        if (newCurrentLevel?.dpBonus !== undefined) {
+          dispatch(addDevPoints(newCurrentLevel.dpBonus));
+        }
         dispatch(addLevel(newCurrentLevel.level));
-        dispatch(multiplyClickPower(newCurrentLevel.bonusPower))
-        dispatch(multiplyPointsPerSecond(newCurrentLevel.bonusPps))
+        if (newCurrentLevel?.bonusPower !== undefined) {
+          dispatch(multiplyClickPower(newCurrentLevel.bonusPower))
+        }
+        if (newCurrentLevel?.bonusPps !== undefined) {
+          dispatch(multiplyPointsPerSecond(newCurrentLevel.bonusPps))
+        }
       }
     }
