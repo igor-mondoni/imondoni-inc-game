@@ -1,14 +1,9 @@
 import type { SpecialUpgrade } from '../../types/game'
-interface SpecialUpgradesState {
-    items: SpecialUpgrade[]
+interface SpecialUpgradesStateType {
+  items: SpecialUpgrade[]
 }
 
-/*
-** Type = clickpower = poder do clique / pps = pontos por segundo / xpgain = quantidade de xp fixo / xp = quantidade de xp ganho 
-** typeGain = B = ganho bruto extra / P = percentagem a mais
-*/
-
-export const SpecialUpgradesState = {
+export const SpecialUpgradesState: SpecialUpgradesStateType = {
     items: [
         {
             id: 1,
@@ -27,6 +22,7 @@ export const SpecialUpgradesState = {
             name: 'Magia de automação',
             type: 'pps',
             value: 0.25,
+            typeGain: 'P',
             cost: 200,
             qtdmax: 9999,
             assetsCategory: [],
@@ -38,6 +34,7 @@ export const SpecialUpgradesState = {
             name: 'Melhora da qualidade do café',
             type: 'pps',
             value: 0.25,
+            typeGain: 'P',
             cost: 200,
             qtdmax: 3,
             assetsCategory: [],
@@ -49,6 +46,7 @@ export const SpecialUpgradesState = {
             name: 'Melhora da qualidade do café',
             type: 'pps',
             value: 0.25,
+            typeGain: 'P',
             cost: 200,
             qtdmax: 3,
             assetsCategory: [],
@@ -60,6 +58,7 @@ export const SpecialUpgradesState = {
             name: 'Melhora na qualidade do prédio',
             type: 'pps',
             value: 0.25,
+            typeGain: 'P',
             cost: 200,
             qtdmax: 3,
             assetsCategory: [],

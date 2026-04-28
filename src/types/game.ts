@@ -15,9 +15,13 @@ export interface SpecialUpgrade {
   id: number
   name: string
   type: 'clickpower' | 'pps'
+  qtdmax: number
   value: number
   cost: number
   image: string
+  typeGain: string
+  assetsCategory: string[]
+  assetsId: string[]
 }
 
 export interface PlayerStatus {
