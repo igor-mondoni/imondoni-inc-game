@@ -1,0 +1,27 @@
+.statsBar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+  padding: 1rem 1.5rem;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  border-bottom: 1px solid rgba(52, 211, 153, 0.2);
+}
+
+.statsBarPoints {
+  font-size: clamp(1.4rem, 4vw, 1.75rem);
+  font-weight: bold;
+  color: var(--color-primary);
+}
+
+.statsBarPps {
+  color: var(--color-text-muted);
+  font-size: 1rem;
+}

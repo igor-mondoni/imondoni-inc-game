@@ -1,4 +1,4 @@
-import styles from '../../styles/GamePage.module.css'
+import styles from './StatsBar.module.css'
 
 interface StatsBarProps {
   devPoints: number

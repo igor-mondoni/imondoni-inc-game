@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import styles from '../../styles/GamePage.module.css'
+import styles from './PurchasePanel.module.css'
 import type { Asset, SpecialUpgrade } from '../../types/game'
 import { addPoints,addPps,addXpDebug,addClickP } from '../../game/debugger'
 import { useDispatch } from 'react-redux'
