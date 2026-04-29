@@ -32,8 +32,8 @@ export function DebuggerButtons() {
       action: () => dispatch(addXpDebug(9)),
     },
     {
-      label: 'Adicionar + 999dp/s',
-      action: () => dispatch(addPps(999)),
+      label: 'Adicionar + 9999dp/s',
+      action: () => dispatch(addPps(9999)),
     },
     {
       label: 'Adicionar 99 Click power',
