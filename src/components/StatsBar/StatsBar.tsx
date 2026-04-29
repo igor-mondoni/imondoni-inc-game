@@ -1,29 +1,18 @@
 import styles from './StatsBar.module.css'
-
-interface StatsBarProps {
-  devPoints: number
-  pointsPerSecond: number,
-  currentLevel: number,
-  currentXpPoint: number
-}
-
-export default function StatsBar({
-  devPoints,
-  pointsPerSecond,
-  currentLevel,
-  currentXpPoint,
-
-}: StatsBarProps) {
+import {  useAppSelector } from '../../app/hooks'
+export default function StatsBar() {
+    const player = useAppSelector((state) => state.player)
+  
   return (
     <header className={styles.statsBar}>
       <div>
-        <p>Xp atual: {currentXpPoint}</p>
-        <p>Level Atual: {currentLevel}</p>
+        <p>Xp atual: {player.experienceOwned}</p>
+        <p>Level Atual: {player.currentLevel}</p>
         <div className={styles.statsBarPoints}>
-          {Math.floor(devPoints)} DevPoints
+          {Math.floor(player.devPointsOwned)} DevPoints
         </div>
         <div className={styles.statsBarPps}>
-          {pointsPerSecond.toFixed(1)} DP/s
+          {(player.pointsPerSecond).toFixed(1)} DP/s
         </div>
       </div>
     </header>

@@ -25,6 +25,9 @@ export interface SpecialUpgrade {
 }
 
 export interface PlayerStatus {
+  profileName: string
+  profileId: string
+  profileCodeUser: string
   devPointsOwned: number
   clickpower: number
   clickedTimes: number
