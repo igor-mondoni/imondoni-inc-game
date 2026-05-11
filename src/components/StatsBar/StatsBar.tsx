@@ -10,10 +10,10 @@ export default function StatsBar() {
         <p>Xp atual: {player.experienceOwned}</p>
         <p>Level Atual: {player.currentLevel}</p>
         <div className={styles.statsBarPoints}>
-          {formatIntegerText(player.devPointsOwned)} DevPoints
+          {(player.devPointsOwned).toFixed(2)} DevPoints
         </div>
         <div className={styles.statsBarPps}>
-          {formatIntegerText(player.pointsPerSecond)} DP/s
+          {(player.pointsPerSecond).toFixed(2)} DP/s
         </div>
       </div>
     </header>

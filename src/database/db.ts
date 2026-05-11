@@ -10,8 +10,8 @@ const db = new Dexie("PlayerDatabase") as Dexie & {
 }
 
 db.version(1).stores({
-  player: "profileName,profileId,profileCodeUser,devPointsOwned,clickpower,clickedTimes,pointsPerSecond,ownedItens,ownedUpgrades,experienceOwned,currentLevel",
-})
+  player: "profileId, profileName, profileCodeUser",
+});
 
 export type { PlayerStatus }
 export { db }

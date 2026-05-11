@@ -11,15 +11,35 @@ import {
   multiplyPointsPerSecond,
   spendDevPoints,
   addXpPoint,
-  addLevel
+  addLevel,
+  setPlayerState,
 } from '../player/playerSlice'
 import { getLevelDataFromXp } from '../../game/level'
 import { updateUpgradeCost } from '../upgrades/upgradesSlice'
 import { LEVEL_CAP } from '../../game/data/xpTable'
+import { savePlayer, loadPlayer } from '../../services/saveService'
 
 const COST_MULTIPLIER_PER_BUY_ASSET = 1.15
 const CLICKPOWER_MULTIPLIER_PER_BUY_ASSET = 1.05
 const COST_MULTIPLIER_PER_BUY_UPGRADE = 1.3
+
+export const handleSavePlayer =
+  () =>
+    async (_dispatch: AppDispatch, getState: () => RootState) => {
+      const state = getState()
+      console.log("Saving")
+      await savePlayer(state.player)
+    }
+
+export const handleLoadPlayer =
+  () =>
+    async (dispatch: AppDispatch) => {
+      const savedPlayer = await loadPlayer()
+
+      if (!savedPlayer) return
+
+      dispatch(setPlayerState(savedPlayer))
+    }
 
 export const handleManualClickWithBonus =
   (onBonusMessage?: (message: string) => void) =>
@@ -30,28 +50,45 @@ export const handleManualClickWithBonus =
       const newClickedTimes = currentStatus.clickedTimes + 1
       let bonus = 0
       let message = ''
-      let xpGained = 0;
+      let xpGained = 0
+
       if (newClickedTimes > 0 && newClickedTimes % 100000 === 0) {
-        xpGained = 50;
-        bonus = (currentStatus.pointsPerSecond * 10) + (currentStatus.pointsPerSecond * (currentStatus.clickpower * 10)) + 10000000
+        xpGained = 50
+        bonus =
+          currentStatus.pointsPerSecond * 10 +
+          currentStatus.pointsPerSecond * (currentStatus.clickpower * 10) +
+          10000000
         message = `+${Math.floor(bonus)} DP de bônus por produtividade máxima!`
       } else if (newClickedTimes > 0 && newClickedTimes % 10000 === 0) {
-        xpGained = 30;
-        bonus = (currentStatus.pointsPerSecond * 10) + (currentStatus.pointsPerSecond * (currentStatus.clickpower * 1.5)) + Math.floor(Math.random() * (999999 - 1 + 1)) + 1
+        xpGained = 30
+        bonus =
+          currentStatus.pointsPerSecond * 10 +
+          currentStatus.pointsPerSecond * (currentStatus.clickpower * 1.5) +
+          Math.floor(Math.random() * (999999 - 1 + 1)) +
+          1
         message = `+${Math.floor(bonus)} DP de bônus por super produtividade!`
       } else if (newClickedTimes > 0 && newClickedTimes % 1000 === 0) {
-        xpGained = 10;
-        bonus = (currentStatus.pointsPerSecond * 10) + (currentStatus.pointsPerSecond * (currentStatus.clickpower * 0.35)) + Math.floor(Math.random() * (9999 - 1 + 1)) + 1
+        xpGained = 10
+        bonus =
+          currentStatus.pointsPerSecond * 10 +
+          currentStatus.pointsPerSecond * (currentStatus.clickpower * 0.35) +
+          Math.floor(Math.random() * (9999 - 1 + 1)) +
+          1
         message = `+${Math.floor(bonus)} DP de bônus por bastante produtividade!`
       } else if (newClickedTimes > 0 && newClickedTimes % 100 === 0) {
-        xpGained = 5;
-        bonus = (currentStatus.pointsPerSecond * 10) + (currentStatus.pointsPerSecond * (currentStatus.clickpower * 0.01)) + Math.floor(Math.random() * (999 - 1 + 1)) + 1
+        xpGained = 5
+        bonus =
+          currentStatus.pointsPerSecond * 10 +
+          currentStatus.pointsPerSecond * (currentStatus.clickpower * 0.01) +
+          Math.floor(Math.random() * (999 - 1 + 1)) +
+          1
         message = `+${Math.floor(bonus)} DP de bônus por produtividade!`
       }
 
       dispatch(incrementClickedTimes())
       dispatch(addDevPoints(currentStatus.clickpower + bonus))
       dispatch(handleAddXpPoint(xpGained))
+
       if (message && onBonusMessage) {
         onBonusMessage(message)
       }
@@ -110,23 +147,28 @@ export const handleBuySpecialUpgrade =
       )
     }
 
-
 export const handleAddXpPoint =
   (xpPoint: number) =>
     (dispatch: AppDispatch, getState: () => RootState) => {
       const state = getState()
+
       const currentLevel = getLevelDataFromXp(state.player.experienceOwned)
       const newCurrentXp = state.player.experienceOwned + xpPoint
-      const newCurrentLevel = getLevelDataFromXp(newCurrentXp);
+      const newCurrentLevel = getLevelDataFromXp(newCurrentXp)
+
       dispatch(addXpPoint(xpPoint))
+
       if (currentLevel.level < newCurrentLevel.level && LEVEL_CAP >= currentLevel.level) {
         if (newCurrentLevel?.dpBonus !== undefined) {
-          dispatch(addDevPoints(newCurrentLevel.dpBonus));
+          dispatch(addDevPoints(newCurrentLevel.dpBonus))
         }
-        dispatch(addLevel(newCurrentLevel.level));
+
+        dispatch(addLevel(newCurrentLevel.level))
+
         if (newCurrentLevel?.bonusPower !== undefined) {
           dispatch(multiplyClickPower(newCurrentLevel.bonusPower))
         }
+
         if (newCurrentLevel?.bonusPps !== undefined) {
           dispatch(multiplyPointsPerSecond(newCurrentLevel.bonusPps))
         }

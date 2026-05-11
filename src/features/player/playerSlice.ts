@@ -30,7 +30,7 @@ const playerSlice = createSlice({
     incrementClickedTimes: (state) => {
       state.clickedTimes += 1
     },
-   incrementClickedTimesDebugger: (state, action: PayloadAction<number>) => {
+    incrementClickedTimesDebugger: (state, action: PayloadAction<number>) => {
       state.clickedTimes += action.payload
     },
 
@@ -64,7 +64,9 @@ const playerSlice = createSlice({
       const newXpLevel = action.payload - state.currentLevel
       state.currentLevel += newXpLevel
     },
-
+    setPlayerState: (_state, action: PayloadAction<PlayerStatus>) => {
+      return action.payload
+    },
     resetPlayer: () => initialState,
   },
 })
@@ -82,7 +84,8 @@ export const {
   resetPlayer,
   addXpPoint,
   addLevel,
-  incrementClickedTimesDebugger
+  incrementClickedTimesDebugger,
+  setPlayerState
 } = playerSlice.actions
 
 export default playerSlice.reducer
