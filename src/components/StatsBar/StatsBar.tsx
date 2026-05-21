@@ -1,6 +1,5 @@
 import styles from './StatsBar.module.css'
 import {  useAppSelector } from '../../app/hooks'
-import { formatIntegerText } from "../../utils/helpers";
 export default function StatsBar() {
     const player = useAppSelector((state) => state.player)
   
