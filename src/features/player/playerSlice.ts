@@ -9,7 +9,7 @@ const initialState: PlayerStatus = {
   clickpower: 1,
   clickedTimes: 0,
   pointsPerSecond: 0,
-  ownedItens: [],
+  ownedItens: {},
   ownedUpgrades: [],
   experienceOwned: 0,
   currentLevel: 1
@@ -50,12 +50,27 @@ const playerSlice = createSlice({
       state.pointsPerSecond = state.pointsPerSecond * (1 + action.payload)
     },
 
-    addOwnedItem: (state, action: PayloadAction<number>) => {
-      state.ownedItens.push(action.payload)
+    addOwnedItem: (
+      state,
+      action: PayloadAction<{ id: number; quantity: number }>
+    ) => {
+      const { id, quantity } = action.payload
+
+      if (state.ownedItens[id]) {
+        state.ownedItens[id] += quantity
+      } else {
+        state.ownedItens[id] = quantity
+      }
     },
 
-    addOwnedUpgrade: (state, action: PayloadAction<number>) => {
-      state.ownedUpgrades.push(action.payload)
+    addOwnedUpgrade: (
+      state,
+      action: PayloadAction<{ id: number; quantity: number }>
+    ) => {
+      const { id, quantity } = action.payload
+
+      state.ownedUpgrades[id] =
+        (state.ownedUpgrades[id] || 0) + quantity
     },
     addXpPoint: (state, action: PayloadAction<number>) => {
       state.experienceOwned += action.payload

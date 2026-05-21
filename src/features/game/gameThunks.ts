@@ -39,6 +39,29 @@ export const handleLoadPlayer =
       if (!savedPlayer) return
 
       dispatch(setPlayerState(savedPlayer))
+      console.log(savedPlayer)
+      /**
+       * Trecho abaixo para carregar valores corretos para os assets e upgrades
+       */
+      Object.entries(savedPlayer.ownedItens || {}).forEach(([id, qtd]) => {
+        for (let i = 0; i < qtd; i++) {
+          console.log(id, qtd)
+          dispatch(buyAssetSuccess({
+            assetId: Number(id),
+            costMultiplier: COST_MULTIPLIER_PER_BUY_ASSET,
+            clickPowerMultiplier: CLICKPOWER_MULTIPLIER_PER_BUY_ASSET,
+          }))
+        }
+      })
+
+      Object.entries(savedPlayer.ownedUpgrades || {}).forEach(([id, qtd]) => {
+        for (let i = 0; i < qtd; i++) {
+          dispatch(updateUpgradeCost({
+            upgradeId: Number(id),
+            costMultiplier: COST_MULTIPLIER_PER_BUY_UPGRADE,
+          }))
+        }
+      })
     }
 
 export const handleManualClickWithBonus =
@@ -95,7 +118,7 @@ export const handleManualClickWithBonus =
     }
 
 export const handleBuyAsset =
-  (assetId: number) =>
+  (assetId: number, qtdadd: number) =>
     (dispatch: AppDispatch, getState: () => RootState) => {
       const state = getState()
 
@@ -107,7 +130,7 @@ export const handleBuyAsset =
       dispatch(spendDevPoints(asset.devPointsCost))
       dispatch(addPointsPerSecond(asset.pps))
       dispatch(addClickPower(asset.clickpower || 0))
-      dispatch(addOwnedItem(asset.id))
+      dispatch(addOwnedItem({ id: assetId, quantity: qtdadd }))
 
       dispatch(
         buyAssetSuccess({
@@ -129,8 +152,7 @@ export const handleBuySpecialUpgrade =
       if (state.player.devPointsOwned < upgrade.cost) return
 
       dispatch(spendDevPoints(upgrade.cost))
-      dispatch(addOwnedUpgrade(upgrade.id))
-
+      dispatch(addOwnedUpgrade({id: upgrade.id, quantity: 1}))
       if (upgrade.type === 'clickpower') {
         dispatch(multiplyClickPower(upgrade.value))
       }

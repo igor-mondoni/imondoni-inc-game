@@ -20,7 +20,7 @@ export default function PurchasePanel() {
           className={`${styles.tabButton} ${activeTab === 'assets' ? styles.activeTab : ''
             }`}
           onClick={() => setActiveTab('debugger')}
-          hidden={true}
+          hidden={false}
         >
           debugger
         </button>

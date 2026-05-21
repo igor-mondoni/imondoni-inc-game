@@ -32,8 +32,8 @@ export interface PlayerStatus {
   clickpower: number
   clickedTimes: number
   pointsPerSecond: number
-  ownedItens: number[]
-  ownedUpgrades: number[]
+  ownedItens: Record<number, number>
+  ownedUpgrades: Record<number, number>
   experienceOwned: number
   currentLevel: number
 }

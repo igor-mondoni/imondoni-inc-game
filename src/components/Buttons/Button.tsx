@@ -72,7 +72,7 @@ export function AssetBuyButton({ asset }: { asset: Asset }) {
 
     return (
         <button
-            onClick={() => dispatch(handleBuyAsset(asset.id))}
+            onClick={() => dispatch(handleBuyAsset(asset.id,1))}
             disabled={disabled}
             className={styles.upgradeButton}
         >

@@ -1,6 +1,7 @@
 // hooks/useGameLoop.ts
 import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
+import { handleSavePlayer } from '../features/game/gameThunks'
 import { addDevPoints } from '../features/player/playerSlice'
 
 export function useGameLoop() {
@@ -12,8 +13,8 @@ export function useGameLoop() {
 
     const interval = setInterval(() => {
       dispatch(addDevPoints(pointsPerSecond / 10))
+      dispatch(handleSavePlayer());
     }, 100)
-
     return () => clearInterval(interval)
   }, [dispatch, pointsPerSecond])
 }
