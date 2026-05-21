@@ -25,12 +25,15 @@ export interface SpecialUpgrade {
 }
 
 export interface PlayerStatus {
+  profileName: string
+  profileId: string
+  profileCodeUser: string
   devPointsOwned: number
   clickpower: number
   clickedTimes: number
   pointsPerSecond: number
-  ownedItens: number[]
-  ownedUpgrades: number[]
+  ownedItens: Record<number, number>
+  ownedUpgrades: Record<number, number>
   experienceOwned: number
   currentLevel: number
 }
